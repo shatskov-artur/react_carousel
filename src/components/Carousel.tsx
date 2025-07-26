@@ -25,7 +25,16 @@ const Carousel: React.FC<Props> = ({
   const handlePrev = () => {
     setCurrentImage(prev => {
       if (infinite) {
-        return (prev - step + images.length) % images.length;
+        let newIndex = prev - step;
+
+        if (newIndex < 0) {
+          newIndex = maxIndex + (newIndex + 1);
+          if (newIndex < 0) {
+            newIndex = 0;
+          }
+        }
+
+        return newIndex;
       }
 
       return Math.max(prev - step, 0);
@@ -35,7 +44,16 @@ const Carousel: React.FC<Props> = ({
   const handleNext = () => {
     setCurrentImage(prev => {
       if (infinite) {
-        return (prev + step) % images.length;
+        let newIndex = prev + step;
+
+        if (newIndex > maxIndex) {
+          newIndex = newIndex - maxIndex - 1;
+          if (newIndex > maxIndex) {
+            newIndex = maxIndex;
+          }
+        }
+
+        return newIndex;
       }
 
       return Math.min(prev + step, maxIndex);

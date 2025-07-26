@@ -2,10 +2,6 @@ import React, { useState } from 'react';
 import './App.scss';
 import Carousel from './components/Carousel';
 
-interface State {
-  images: string[];
-}
-
 const state = {
   images: [
     './img/1.png',
@@ -21,7 +17,7 @@ const state = {
   ],
 };
 
-const App: React.FC<State> = () => {
+const App: React.FC = () => {
   const { images } = state;
 
   const [itemWidth, setItemWidth] = useState(130);
